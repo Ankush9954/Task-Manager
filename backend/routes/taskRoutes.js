@@ -1,13 +1,19 @@
-const express = require("express");
+import express from "express";
 const router = express.Router();
-const { getTasks, getTask, postTask, putTask, deleteTask } = require("../controllers/taskControllers");
-const { verifyAccessToken } = require("../middlewares.js");
+import {
+  getTasks,
+  getTask,
+  postTask,
+  putTask,
+  deleteTask,
+} from "../controllers/taskControllers.js";
+import { verifyAccessToken } from "../middlewares/index.js";
 
 // Routes beginning with /api/tasks
-router.get("/", verifyAccessToken, getTasks);
-router.get("/:taskId", verifyAccessToken, getTask);
-router.post("/", verifyAccessToken, postTask);
-router.put("/:taskId", verifyAccessToken, putTask);
-router.delete("/:taskId", verifyAccessToken, deleteTask);
+router.get("/", getTasks);
+router.get("/:taskId", getTask);
+router.post("/", postTask);
+router.put("/:taskId", putTask);
+router.delete("/:taskId", deleteTask);
 
-module.exports = router;
+export default router;
